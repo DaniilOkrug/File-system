@@ -1,0 +1,46 @@
+.wrapper {
+    grid-area: wrapper;
+    border: 1px solid black;
+
+    .table{
+        .table__header {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+
+            .table__header__item {
+                // display: inline-block;
+                // flex: 1 1 auto;
+                padding: 0.5rem 1rem;
+                border: 0.1rem solid black;
+
+        
+            }
+        }
+
+        .table__content {
+            .table__content__row {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+
+                &:hover {
+                    background-color: $gray;
+                    cursor: pointer;
+
+                    .table__content__item{
+                        border-right: 0.1rem dotted;
+
+                        &:last-child {
+                            border-right: none;
+                        }
+                    }
+                }
+            }
+
+            .table__content__item {
+                display: inline-block;
+                flex: 1 1 auto;
+                padding: 0.5rem 1rem;
+            }
+        }
+    }
+}

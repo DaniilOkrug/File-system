@@ -1,5 +1,81 @@
-body {
-    background-color: black;
-    font-size: 21px;
-    color: white;
+@import "vars";
+
+html {
+    font-size: 62.5%;
 }
+
+body {
+    color: black;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    overflow-x: hidden;
+    margin: 0;  
+
+    display: grid;
+    grid-template-areas: 
+        "sidebar wrapper"
+        "footer footer";
+    grid-template-rows: 1fr 20%;
+    grid-template-columns: 40% 1fr;
+    height: 100vh;
+
+    &.no-scroll {
+        overflow: hidden;
+    }
+}
+
+ul {
+    list-style-type:none;
+}       
+
+a, a:hover {
+    color: black;
+    text-decoration: none;
+}
+
+p {
+    padding: 0;
+    margin: 0;
+}
+
+table, th, td {
+    border-collapse: collapse;
+}
+
+.btn {
+    display: inline-block;
+    background-color: $gray;
+    padding: 2rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
+    margin: 1rem;
+    border-radius: 0.5rem;
+
+    &:hover {
+        background-color: $gray-hover;
+        cursor: pointer;
+    }
+}
+
+// @media (min-width: 500px) {
+//     body {
+//         grid-template-columns: 1fr 2fr;
+//         grid-template-areas:
+//             "sidebar wrapper"
+//             "footer"
+//     }
+// }
+
+// @media (min-width: 700px) {
+//     body {
+//         grid-template-columns: 1fr 2fr;
+//         grid-template-areas:
+//             "sidebar wrapper"
+//             "footer"
+//      }
+// }
+
+//Blocks
+@import "blocks/sidebar.scss";
+@import "blocks/wrapper.scss";
+@import "blocks/footer.scss";

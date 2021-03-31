@@ -1,0 +1,49 @@
+.sidebar {
+    grid-area: sidebar;
+    padding: 1rem;
+
+    border: 0.1rem solid black;
+
+    .folder__item-global, .folder__item {
+        display: flex;
+        flex-direction: column;
+        padding-left: 1rem;
+
+        .folder__item__content {
+            .folder__item__content__body {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+            }
+
+            .folder__item__connector-left {
+                width: 1rem;
+                height: 0.1rem;
+                border-bottom: 0.1rem dotted;
+            }
+        }
+
+        .folder__item__name {
+            line-height: 4rem;
+            padding-left: 1.5rem;
+        }
+    }
+
+    .folder__item{
+        padding-left: 0;
+        margin-left: 2rem;
+        border-left: 0.1rem dotted;
+
+        .folder__item__content {
+            .folder__item__connector-left {
+                width: 1rem;
+                height: 0.1rem;
+                border-bottom: 0.1rem dotted;
+            }
+        }
+    }
+
+    .img-folder {
+        max-width: 4rem;
+    }
+}
