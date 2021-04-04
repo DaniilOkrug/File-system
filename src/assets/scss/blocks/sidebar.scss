@@ -4,7 +4,7 @@
 
     border: 0.1rem solid black;
 
-    .folder__item-global, .folder__item {
+    .folder__item-root, .folder__item {
         display: flex;
         flex-direction: column;
         padding-left: 1rem;
@@ -36,7 +36,7 @@
 
     .folder__item{
         padding-left: 0;
-        margin-left: 2rem;
+        margin-left: 3rem;
         border-left: 0.1rem dotted;
 
         .folder__item__content {

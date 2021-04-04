@@ -10,7 +10,11 @@ const port = 3002;
 
 app.use('/', (req, res, next) => {
     let dirPath = './project_fs';
-    res.send(getFileSystem(dirPath));
+    res.send([{
+        type: 'dir',
+        name: path.basename(dirPath),
+        children: getFileSystem(dirPath),
+    }]);
 });
 
 function getFileSystem(dirPath) {
