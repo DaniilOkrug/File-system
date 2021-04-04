@@ -1,8 +1,10 @@
 {
-    "name": "brainscloud",
+    "name": "file-system",
     "version": "1.0.0",
-    "description": "brainscloud",
-    "author": "brainscloud",
+    "author": "Daniil Okrug",
+    "scripts": {
+        "start-node-server": "nodemon server/index.js"
+    },
     "devDependencies": {
         "@babel/core": "^7.12.3",
         "@babel/preset-env": "^7.12.1",
@@ -31,5 +33,9 @@
         "last 1 version",
         "> 1%",
         "IE 10"
-    ]
+    ],
+    "dependencies": {
+        "express": "^4.17.1",
+        "nodemon": "^2.0.7"
+    }
 }

@@ -21,6 +21,11 @@
                 height: 0.1rem;
                 border-bottom: 0.1rem dotted;
             }
+
+            &:hover {
+                background-color: $gray;
+                cursor: pointer;
+            }
         }
 
         .folder__item__name {

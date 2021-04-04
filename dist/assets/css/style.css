@@ -54,7 +54,57 @@ table, th, td {
 
 .sidebar {
     grid-area: sidebar;
+    padding: 1rem;
     border: 0.1rem solid black;
+}
+
+.sidebar .folder__item-global, .sidebar .folder__item {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    padding-left: 1rem;
+}
+
+.sidebar .folder__item-global .folder__item__content .folder__item__content__body, .sidebar .folder__item .folder__item__content .folder__item__content__body {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.sidebar .folder__item-global .folder__item__content .folder__item__connector-left, .sidebar .folder__item .folder__item__content .folder__item__connector-left {
+    width: 1rem;
+    height: 0.1rem;
+    border-bottom: 0.1rem dotted;
+}
+
+.sidebar .folder__item-global .folder__item__content:hover, .sidebar .folder__item .folder__item__content:hover {
+    background-color: #e7e7e7;
+    cursor: pointer;
+}
+
+.sidebar .folder__item-global .folder__item__name, .sidebar .folder__item .folder__item__name {
+    line-height: 4rem;
+    padding-left: 1.5rem;
+}
+
+.sidebar .folder__item {
+    padding-left: 0;
+    margin-left: 2rem;
+    border-left: 0.1rem dotted;
+}
+
+.sidebar .folder__item .folder__item__content .folder__item__connector-left {
+    width: 1rem;
+    height: 0.1rem;
+    border-bottom: 0.1rem dotted;
+}
+
+.sidebar .img-folder {
+    max-width: 4rem;
 }
 
 .wrapper {
