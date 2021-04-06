@@ -18,14 +18,14 @@
 </head>
 <body>
 
-    <section class="sidebar">
+    <section id="sidebar" class="sidebar active">
         <div id="folder" class="folder">
         </div>
     </section>
 
-    <main class="wrapper">
+    <main id="wrapper" class="wrapper">
         
-        <div class="table">
+        <div id="table" class="table">
             <div class="table__header">
                 <div class="table__header__item">
                     <p>Name</p>
@@ -37,46 +37,13 @@
                     <p>Comment</p>
                 </div>
             </div>
-            <div class="table__content">
-                <div class="table__content__row">
-                    <div class="table__content__item">
-                        <p class="table__conten__name">Abcd</p>
-                    </div>
-                    <div class="table__content__item">
-                        <p class="table__conten__name">12.03.2020</p>
-                    </div>
-                    <div class="table__content__item">
-                        <p class="table__conten__name">123456</p>
-                    </div>
-                </div>
-        
-                
-            </div>
         </div>
     </main>
 
     <footer>
-        <div class="btn">
-            <p>New</p>
-        </div>
-        <div class="btn">
-            <p>Select</p>
-        </div>
-        <div class="btn">
-            <p>Duplicate</p>
-        </div>
-        <div class="btn">
-            <p>Archive</p>
-        </div>
-        <div class="btn">
-            <p>Delete</p>
-        </div>
-        <div class="btn">
-            <p>Open</p>
-        </div>
-        <div class="btn">
-            <p>Edit</p>
-        </div>
+        <button id="new" class="btn">New</button>
+        <button id="delete" class="btn">Delete</button>
+        <button id="rename" class="btn">Rename</button>
     </footer>
     <script src="assets/js/app.js"></script>
 </body>

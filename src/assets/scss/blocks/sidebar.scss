@@ -1,6 +1,7 @@
 .sidebar {
     grid-area: sidebar;
     padding: 1rem;
+    overflow: scroll;
 
     border: 0.1rem solid black;
 
@@ -22,6 +23,10 @@
                 border-bottom: 0.1rem dotted;
             }
 
+            &.active {
+                background-color: $gray;
+            }
+
             &:hover {
                 background-color: $gray;
                 cursor: pointer;
@@ -35,6 +40,7 @@
     }
 
     .folder__item{
+        display: none;
         padding-left: 0;
         margin-left: 3rem;
         border-left: 0.1rem dotted;
@@ -46,9 +52,21 @@
                 border-bottom: 0.1rem dotted;
             }
         }
+
+        &.show {
+            display: flex;
+        }
     }
 
     .img-folder {
         max-width: 4rem;
+    }
+
+    &.active {
+        .folder__item__content{
+            &.active {
+                background-color:cornflowerblue;
+            }
+        }
     }
 }

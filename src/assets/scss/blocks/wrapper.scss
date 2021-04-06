@@ -1,6 +1,7 @@
 .wrapper {
     grid-area: wrapper;
     border: 1px solid black;
+    overflow: scroll;
 
     .table{
         .table__header {
@@ -8,8 +9,6 @@
             grid-template-columns: repeat(3, 1fr);
 
             .table__header__item {
-                // display: inline-block;
-                // flex: 1 1 auto;
                 padding: 0.5rem 1rem;
                 border: 0.1rem solid black;
 
@@ -18,6 +17,8 @@
         }
 
         .table__content {
+            display: none;
+
             .table__content__row {
                 display: grid;
                 grid-template-columns: repeat(3, 1fr);
@@ -34,12 +35,29 @@
                         }
                     }
                 }
+
+                &.active {
+                    background-color: $gray;
+                }
+            }
+
+            &.active {
+                display: block;
             }
 
             .table__content__item {
                 display: inline-block;
                 flex: 1 1 auto;
                 padding: 0.5rem 1rem;
+                overflow: hidden;
+            }
+        }
+    }
+
+    &.active {
+        .table__content__row {
+            &.active {
+                background-color: cornflowerblue!important;
             }
         }
     }
