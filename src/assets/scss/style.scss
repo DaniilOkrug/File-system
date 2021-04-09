@@ -57,23 +57,27 @@ table, th, td {
     }
 }
 
-// @media (min-width: 500px) {
-//     body {
-//         grid-template-columns: 1fr 2fr;
-//         grid-template-areas:
-//             "sidebar wrapper"
-//             "footer"
-//     }
-// }
+@media (max-width: 500px) {
+    body {
+        grid-template-columns: 1fr, 1fr;
+        grid-template-rows: 1fr 20% 15%;
+        grid-template-areas:
+            "sidebar sidebar"
+            "wrapper wrapper"
+            "footer footer"
+    }
+}
 
-// @media (min-width: 700px) {
-//     body {
-//         grid-template-columns: 1fr 2fr;
-//         grid-template-areas:
-//             "sidebar wrapper"
-//             "footer"
-//      }
-// }
+@media (max-width: 700px) {
+    body {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 20% 15%;
+        grid-template-areas:
+            "sidebar"
+            "wrapper"
+            "footer"
+     }
+}
 
 //Blocks
 @import "blocks/sidebar.scss";

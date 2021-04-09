@@ -28,7 +28,13 @@ app.post('/rename', (req, res, next) => {
                   });
                 break
             case 'file':
-
+                fs.rename(rename.path + '/' + rename.name, rename.path + '/' + rename.newName +   '.txt', function(err) {
+                    if (err) {
+                      console.log(err);
+                    } else {
+                      console.log("Successfully renamed");
+                    }
+                    });
                 break
         }
         res.status(200).send();
@@ -43,7 +49,7 @@ app.post('/deletefolder', (req, res, next) => {
 
     req.on("end", () => {
         const folder = JSON.parse(body);
-        console.log('Deleating fodler:', folder);
+        console.log('Deleting folder:', folder);
 
         rimraf(folder.path, (err) => {
             if(err) {
@@ -68,6 +74,7 @@ app.post('/deletefile', (req, res, next) => {
         const file = JSON.parse(body);
         console.log('Deleating file:', file);
         fs.unlinkSync(file.path + '/' + file.name);
+        console.log('Deleating successful!');
         res.status(200).send();
     });
 });
@@ -80,12 +87,12 @@ app.post('/newfolder', (req, res, next) => {
 
     req.on("end", () => {
         const folder = JSON.parse(body);
-        console.log(folder);
+        console.log('Creating directory:', folder);
 
         fs.mkdir(folder.path + '/' + folder.name, (err) => {
             if (err) {
                 res.status(500).send();
-                throw err;
+                console.log(err);
             } else {
                 console.log('Directory created');
             }
@@ -105,14 +112,14 @@ app.post('/newfile', (req, res, next) => {
 
     req.on("end", () => {
         const file = JSON.parse(body);
-        console.log(file);
+        console.log('Creating file:', file);
 
         const creationFile = file.path + '/' + file.name + '.txt';
         console.log('filePath:', creationFile);
         fs.open(creationFile, 'w', (err) => {
             if (err) {
                 res.status(500).send();
-                throw err;
+                console.log(err);
             }
             console.log('File created!')
         });

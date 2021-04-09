@@ -116,20 +116,35 @@ function foldersOnСlick() {
     let activeFolder_tableId
 
     //Начальной активной директорией является первая root директория
-
     folders.forEach(folder =>
         folder.addEventListener("click", () => {
-            //Скрываем саб-директории
-            if (folder.classList.contains('active') && folder.nextElementSibling.classList.contains('show')) {
-                let delete_show = folder.parentElement.querySelectorAll('div.folder__item .show')
-                delete_show.forEach(element => element.classList.remove('show'))
-                controlOfShowing = false
-            } else if (folder.classList.contains('active') && !folder.nextElementSibling.classList.contains('show')) {
-                //Показываем саб-директории
-                let currentSibling = folder.nextElementSibling
-                for (let i = 1; i < folder.parentElement.childElementCount; i++) {
-                    currentSibling.classList.add('show')
-                    currentSibling = currentSibling.nextElementSibling
+            if (folder.childElementCount < 1) {
+                //Скрываем саб-директории
+                if (folder.classList.contains('active')) {
+                    let delete_show = folder.parentElement.querySelectorAll('div.folder__item .show')
+                    delete_show.forEach(element => element.classList.remove('show'))
+                    controlOfShowing = false
+                } else {
+                    //Показываем саб-директории
+                    let currentSibling = folder.nextElementSibling
+                    for (let i = 1; i < folder.parentElement.childElementCount; i++) {
+                        currentSibling.classList.add('show')
+                        currentSibling = currentSibling.nextElementSibling
+                    }
+                }
+            } else {
+                //Скрываем саб-директории
+                if (folder.classList.contains('active') && folder.nextElementSibling.classList.contains('show')) {
+                    let delete_show = folder.parentElement.querySelectorAll('div.folder__item .show')
+                    delete_show.forEach(element => element.classList.remove('show'))
+                    controlOfShowing = false
+                } else if (folder.classList.contains('active') && !folder.nextElementSibling.classList.contains('show')) {
+                    //Показываем саб-директории
+                    let currentSibling = folder.nextElementSibling
+                    for (let i = 1; i < folder.parentElement.childElementCount; i++) {
+                        currentSibling.classList.add('show')
+                        currentSibling = currentSibling.nextElementSibling
+                    }
                 }
             }
 
@@ -184,16 +199,42 @@ function newFile_Folder() {
         //Определение времени, типа и имени объекта
         if (document.getElementById('wrapper').classList.contains('active')) {
             objName = prompt(`File will be created in the directiry "${itemSelected.querySelector('.folder__item__name').innerHTML}". Enter the file name`, '')
+            let fileNames = document.querySelector('div.table__content.active').querySelectorAll('p.table__content__name')
+            console.log('fileNames:', fileNames)
+            for (var i = 0; i < fileNames.length; i++) {
+                if (fileNames[i].innerHTML == objName + '.txt') {
+                    alert('File with this name already exists')
+                    return
+                }
+            }
             type = 'file'
             url = 'http://localhost:3002/newfile'
             if (objName == null) return
         } else {
             objName = prompt(`New directory will be created in the folder "${itemSelected.querySelector('.folder__item__name').innerHTML}" Enter the folder name`, '')
+            console.log('selected', itemSelected)
+            if (objName == null || objName == '') return
+            let foldersNames
+            if (itemSelected.childElementCount != 0) {
+                if (itemSelected.classList.contains('folder__item-root')) {
+                    foldersNames = itemSelected.firstElementChild
+                } else {
+                    foldersNames = itemSelected.parentElement.firstElementChild
+                }
+                console.log('first child', foldersNames)
+                for (var i = 0; i < itemSelected.childElementCount-1; i++) {
+                    if (foldersNames.nextElementSibling.querySelector('.folder__item__name').innerHTML == objName) {
+                        alert('Such folder already exists')
+                        return
+                    }
+                    foldersNames = foldersNames.nextElementSibling
+                }
+            }
             type = 'dir'
             url = 'http://localhost:3002/newfolder'
-            if (objName == null) return
         }
 
+        console.log('url', url)
         xhr.open(
             'POST',
             url
@@ -244,7 +285,9 @@ function newFile_Folder() {
                         break
                     case 'dir':
                         const folderId = uuidv4()
-                        console.log('sibling', itemSelected.querySelector('folder__item'))
+                        //let folders = document.querySelectorAll('div.folder__item__content')
+
+                        //folders.forEach(folder => folder.removeEventListener('click', listener, false))
 
                         let currentSibling = itemSelected.querySelector('div.folder__item')
                         for (let i = 1; i < itemSelected.childElementCount; i++) {
@@ -292,7 +335,7 @@ function deleteFile_Folder() {
 
         folderSelected = document.querySelector('div.folder__item__content.active').parentElement
         if (document.getElementById('wrapper').classList.contains('active')) {
-            tableRowSelected = document.querySelector('div.table__content__row.active').parentElement
+            tableRowSelected = document.querySelector('div.table__content__row.active')
             itemName = tableRowSelected.querySelector('p.table__content__name').innerHTML
             type = 'file'
             url = 'http://localhost:3002/deletefile'
@@ -327,7 +370,7 @@ function deleteFile_Folder() {
         xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8")
         xhr.send(JSON.stringify({
             name: itemName,
-            pathNew: path,
+            path: path,
             type: type,
         }))
 
@@ -344,7 +387,7 @@ function deleteFile_Folder() {
                         folderSelected.remove()
                         break
                     case 'file':
-                        tableRowSelected.remove()
+                        document.querySelector('div.table__content__row.active').remove()
                         break
                 }
             } else { //Ошибка с сервера
@@ -361,7 +404,8 @@ function rename() {
         folderSelected = document.querySelector('div.folder__item__content.active').parentElement
 
         if (document.getElementById('wrapper').classList.contains('active')) {
-            tableRowSelected = document.querySelector('div.table__content__row.active').parentElement
+            tableRowSelected = document.querySelector('div.table__content__row.active')
+            console.log(tableRowSelected)
             itemName = tableRowSelected.querySelector('p.table__content__name').innerHTML
             type = 'file'
         } else {
@@ -386,7 +430,7 @@ function rename() {
         }
 
         const newName = prompt(`Enter new name`, '')
-        if(newName == undefined) return
+        if (newName == undefined) return
 
         xhr.open(
             'POST',
@@ -407,13 +451,12 @@ function rename() {
 
             // Положительный ответ
             if (xhr.status === 200) {
-                let response = JSON.parse(xhr.responseText)
                 switch (type) {
                     case 'dir':
-                        folderSelected.querySelector('.folder__item__name').innerHTML = response.name
+                        folderSelected.querySelector('.folder__item__name').innerHTML = newName
                         break
                     case 'file':
-                        document.querySelector('div.table__content__row.active').parentElement.querySelector('p.table__content__name').innerHTML = response.name
+                        document.querySelector('div.table__content__row.active').querySelector('p.table__content__name').innerHTML = newName + '.txt'
                         break
                 }
             } else { //Ошибка с сервера
